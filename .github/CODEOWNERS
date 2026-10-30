@@ -1,0 +1,7 @@
+# Code owners are automatically requested for review on pull requests.
+# See https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Add further maintainers or teams as the project grows, e.g.:
+#   /internal/provider/ @<provider-team>
+
+* @Kayamii

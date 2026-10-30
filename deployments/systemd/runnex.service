@@ -1,0 +1,51 @@
+# Example systemd unit for Runnex.
+#
+# NOT USABLE YET: Runnex does not have a long-running server command. This
+# file records the intended hardening defaults so they are in place from the
+# start. Update ExecStart once the server command exists.
+#
+# Install:
+#   sudo useradd --system --no-create-home --shell /usr/sbin/nologin runnex
+#   sudo install -m 0755 runnex /usr/local/bin/runnex
+#   sudo cp runnex.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now runnex
+
+[Unit]
+Description=Runnex self-hosted runner manager
+Documentation=https://github.com/Kayamii/Runnex
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=runnex
+Group=runnex
+# Placeholder: replace with the server command once implemented.
+ExecStart=/usr/local/bin/runnex version
+Restart=on-failure
+RestartSec=5s
+
+# Configuration and state directories, created and owned by systemd.
+ConfigurationDirectory=runnex
+StateDirectory=runnex
+ConfigurationDirectoryMode=0750
+StateDirectoryMode=0750
+
+# Hardening. Relax only with a documented reason.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictRealtime=true
+RestrictNamespaces=true
+CapabilityBoundingSet=
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target

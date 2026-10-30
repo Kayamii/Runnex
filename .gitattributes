@@ -1,0 +1,11 @@
+# Normalize line endings to LF in the repository and working tree so that
+# gofmt, shell scripts and the Makefile behave the same on every platform.
+* text=auto eol=lf
+
+*.go     diff=golang
+*.sh     text eol=lf
+Makefile text eol=lf
+
+*.png    binary
+*.jpg    binary
+*.gz     binary
